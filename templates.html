@@ -1,0 +1,145 @@
+
+<script type="text/template" id="navigate-template">
+
+   <nav id="navigate-template">
+		<ul role="navigation">
+			<li class="col-xs-2 active"><button class="btn-nav active lastSelect" id="btn1"><img src="img/ic_action_camera-light.png" /><br />snap</button></li>
+			<li class="col-xs-2"><button class="btn-nav disable" id="btn2"><img src="img/ic_action_picture-light.png" /><br />Photos</button></li>
+			<li class="col-xs-3"><button class="btn-nav disable" id="btn3"><img src="img/ic_action_paste-light.png" /><br />Treasures</button></li>
+			<li class="col-xs-3"><button class="btn-nav disable" id="btn4"><img src="img/ic_action_search-light.png" /><br />Compare</button></li>
+			<li class="col-xs-2"><button class="btn-nav disable" id="btn5"><img src="img/ic_action_send_light.png" /><br />Send</button></li>
+		</ul>
+	</nav>
+
+</script>
+<script type="text/template" id="snap">
+	<section id="snap">
+		<p> Afin d'optimiser l'outil de comparaison, privilégiez les photographies en mode paysage</p>
+		<p> Bonne Chasse !</p>
+	</section>
+</script>
+
+<script type="text/template" id="swiper-photos">
+	<div id="swiper-photos">
+		<section class="swiper-container" >
+			<div class="swiper-wrapper">
+				<% _.each(photos, function(photo) { %>
+					<div class="swiper-slide"  >
+						<img src="<%= photo.id %>" class="img-responsive" alt="Responsive image"/>
+						<button id="delete-btn">Delete</button>
+					</div>
+				<% });	%>
+			</div>
+			<div class="pagination"></div>
+		</section>
+	</div>
+	<script>
+		var mySwiper = new Swiper('.swiper-container',{
+			pagination: '.pagination',
+			paginationClickable: true
+		})
+	</script>
+</script>
+
+<script type="text/template" id="swiper-treasures">
+	<div id="swiper-treasures" class="swiper-container">
+		<div class="swiper-wrapper">
+			<%	_.each(tresors, function(tresor) { %>
+				<div class="swiper-slide"  >
+					<img src="img/tresors/<%= tresor.img %>" class="img-responsive" alt="<%= tresor.name %> - <%= tresor.latinName %>"/>
+						<div class="treasure-description">
+							<h1><%= tresor.name %><br /><span><%= tresor.latinName %></span></h1>
+							<p><strong>Embranchement : </strong><%= tresor.phylum %><br />
+							<strong>Classe : </strong><%= tresor.classe %><br />
+							<strong>Ordre : </strong><%= tresor.order %><br />
+							<strong>Famille : </strong><%= tresor.family %></p>
+							<h2>Répartition géographique</h2>
+							<p><%= tresor.distribution %></p>
+							<h2>Description</h2>
+							<p><%= tresor.description %></p>
+							<h2>Habitat</h2>
+							<p><%= tresor.habitat %></p>
+						</div>	
+					</div>
+				
+			<% });	%>
+		</div>
+		<div class="pagination"></div>
+	</div>
+	<script>
+		var mySwiper = new Swiper('.swiper-container',{
+			pagination: '.pagination',
+			paginationClickable: true
+		})
+	</script>
+</script>
+
+
+
+<script type="text/template" id="compare">
+	<div id="compare">
+	
+		<div id="swiper-photos">
+			<section class="swiper-container compare-photos" >
+				<div class="swiper-wrapper">
+					<%	_.each(photos, function(photo) { %>
+						<div class="swiper-slide"  >
+							<img src="<%= photo.id %>" class="img-responsive" alt="Responsive image"/><% $photoURI=photo.img %>
+							<button id="delete-btn">Delete</button>
+						</div>
+						
+					<% });	%>
+				</div>
+				<div class="pagination pg1"></div>
+			</section>
+			
+		</div>
+	
+		<div id="swiper-treasures">
+			<section class="swiper-container compare-treasures" >
+				<div class="swiper-wrapper">
+					<%	_.each(tresors, function(tresor) { %>
+						<div class="swiper-slide"  >
+							<div class="image">
+								<img src="img/tresors/<%= tresor.img %>" class="img-responsive" alt="<%= tresor.name %> - <%= tresor.latinName %>"/>
+								<h3><%= tresor.name %> </h3>
+							</div>
+							<div class="treasure-description">
+							<h1><span><%= tresor.latinName %></span></h1>
+							<p><strong>Embranchement : </strong><%= tresor.phylum %><br />
+							<strong>Classe : </strong><%= tresor.classe %><br />
+							<strong>Ordre : </strong><%= tresor.order %><br />
+							<strong>Famille : </strong><%= tresor.family %></p>
+							<h2>Répartition géographique</h2>
+							<p><%= tresor.distribution %></p>
+							<h2>Description</h2>
+							<p><%= tresor.description %></p>
+							<h2>Habitat</h2>
+							<p><%= tresor.habitat %></p>
+						</div>	
+						</div>
+					<% });	%>
+				</div>
+				<div class="pagination pg2"></div>
+			</section>
+	
+		</div>
+	</div>
+	
+	
+	<script>
+		var mySwiper = new Swiper('.compare-photos',{
+			pagination: '.pg1',
+			paginationClickable: true
+		})
+		var mySwiper = new Swiper('.compare-treasures',{
+			pagination: '.pg2',
+			paginationClickable: true
+		})
+	</script>
+	
+		
+</script>
+
+
+
